@@ -64,21 +64,18 @@
             background-color: #f8b400;
             color: #fff;
         }
-        img {
-            width: 300px;
-            height: 200px;
-            display: block;
-            margin: 10px auto;
-            border-radius: 10px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-        }
         .carousel {
             position: relative;
-            width: 300px;
+            width: 80%;
             margin: 0 auto;
         }
         .carousel img {
+            width: 100%;
+            height: auto;
             display: none;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
         }
         .carousel img.active {
             display: block;
@@ -116,6 +113,7 @@
         <div><a href="#education">Education</a></div>
         <div><a href="#skill">Skills</a></div>
         <div><a href="#certificate">Certificates</a></div>
+        <div><a href="#hackathon">Hackathon</a></div>
     </div>
 </header>
 
@@ -133,29 +131,47 @@
     <h2>Skills</h2>
     <table>
         <tr>
-            <th>Bahasa Malaysia</th>
+            <th>Language</th>
+            <th>Level</th>
+        </tr>
+        <tr>
+            <td>Bahasa Malaysia</td>
             <td>Fluent</td>
         </tr>
         <tr>
-            <th>English</th>
+            <td>English</td>
             <td>Fluent</td>
         </tr>
         <tr>
-            <th>Mandarin</th>
+            <td>Mandarin</td>
             <td>Fluent</td>
         </tr>
     </table>
 </section>
 
+<section id="hackathon">
+    <h2>Hackathon 2024</h2>
+    <div class="carousel" id="hackathonCarousel">
+        <img src="hackathon.jpg" alt="Hackathon 1" class="active">
+        <img src="hackathon2.jpg" alt="Hackathon 2">
+        <img src="hackathon3.jpg" alt="Hackathon 3">
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+    </div>
+    <p>To celebrate our 40th anniversary, we’re hosting an event called Hackatalk, which combines tech talks and hackathon. The event will run for 40 hours throughout the week from July 1st to July 5th, 2024, aligning perfectly with our 40-year milestone.</p>
+</section>
+
 <section id="certificate">
     <h2>Certificates</h2>
-    <div class="carousel">
+    <div class="carousel" id="certificateCarousel">
         <img src="739912.jpg" alt="Certificate 1" class="active">
         <img src="857716.jpg" alt="Certificate 2">
         <img src="932961.jpg" alt="Certificate 3">
         <div class="carousel-controls">
-            <button id="prevBtn">Previous</button>
-            <button id="nextBtn">Next</button>
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
         </div>
     </div>
 </section>
@@ -165,19 +181,21 @@
 </footer>
 
 <script>
-    const images = document.querySelectorAll('.carousel img');
-    let currentIndex = 0;
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        const images = carousel.querySelectorAll('img');
+        let currentIndex = 0;
 
-    document.getElementById('nextBtn').addEventListener('click', () => {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex + 1) % images.length;
-        images[currentIndex].classList.add('active');
-    });
+        carousel.querySelector('.nextBtn').addEventListener('click', () => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        });
 
-    document.getElementById('prevBtn').addEventListener('click', () => {
-        images[currentIndex].classList.remove('active');
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        images[currentIndex].classList.add('active');
+        carousel.querySelector('.prevBtn').addEventListener('click', () => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        });
     });
 </script>
 
