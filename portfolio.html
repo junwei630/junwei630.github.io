@@ -1,0 +1,316 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <title>My Portfolio</title>
+    <style>
+        html {
+            width: 90%;
+            margin-left: auto;
+            margin-right: auto;
+            font-family: Arial, sans-serif;
+            background-color: black;
+            color: #333;
+        }
+        body {
+            background-image: url('background.jpg');
+            background-size: cover;
+            background-attachment: fixed;
+            animation: backgroundAnimation 20s infinite alternate;
+        }
+        @keyframes backgroundAnimation {
+            0% { filter: brightness(1); }
+            100% { filter: brightness(0.7); }
+        }
+        header {
+            background-color: #f8b400;
+            padding: 20px 0;
+            text-align: center;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .header > div {
+            display: inline-block;
+            margin: 0 20px;
+        }
+        .header a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 20px;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+        }
+        .header a:hover {
+            background-color: #e58e26;
+        }
+        section {
+            padding: 40px 20px;
+            background-color: rgba(255, 255, 255, 0.8);
+            margin: 20px 0;
+            border-radius: 30px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        section:hover {
+            transform: translateY(-10px);
+        }
+        section h2 {
+            font-size: 24px;
+            margin-bottom: 20px;
+            text-align: center;
+            color: #e58e26;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        section p {
+            font-family: 'Georgia', serif;
+            font-size: 16px;
+            line-height: 1.6;
+            text-align: justify;
+            color: #555;
+        }
+        section img {
+            display: inline-block;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease;
+        }
+        section img:hover {
+            transform: scale(1.05);
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 0 auto;
+        }
+        th, td {
+            padding: 10px;
+            border: 1px solid #ccc;
+            text-align: left;
+        }
+        th {
+            background-color: #f8b400;
+            color: #fff;
+        }
+        .carousel {
+            position: relative;
+            width: 80%;
+            margin: 0 auto;
+        }
+        .carousel img {
+            width: 100%;
+            height: auto;
+            display: none;
+            margin: 10px 0;
+            border-radius: 10px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
+        .carousel img.active {
+            display: block;
+        }
+        .carousel-controls {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 10px;
+        }
+        .carousel-controls button {
+            background-color: #f8b400;
+            border: none;
+            padding: 10px 20px;
+            color: #fff;
+            cursor: pointer;
+            border-radius: 5px;
+            transition: background-color 0.3s ease;
+            display: flex;
+            align-items: center;
+        }
+        .carousel-controls button:hover {
+            background-color: #e58e26;
+        }
+        .carousel-controls .prevBtn::before {
+            content: "\2190"; /* Left arrow Unicode */
+            margin-right: 8px;
+        }
+        .carousel-controls .nextBtn::after {
+            content: "\2192"; /* Right arrow Unicode */
+            margin-left: 8px;
+        }
+        footer {
+            text-align: center;
+            padding: 20px 0;
+            background-color: #333;
+            color: #fff;
+        }
+        .about-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            border-left: 5px solid #e58e26;
+            padding-left: 20px;
+        }
+        .about-container img {
+            width: 220px;
+            height: auto;
+            border-radius: 10%;
+            margin-right: 20px;
+            flex-shrink: 0;
+        }
+        .about-container p {
+            flex: 1;
+        }
+
+            footer {
+        text-align: center;
+        padding: 20px 0;
+        background-color: #333;
+        color: #fff;
+    }
+
+    .footer-icons {
+        margin-top: 10px;
+    }
+
+    .footer-icon {
+        color: #fff;
+        margin: 0 10px;
+        text-decoration: none;
+        font-size: 24px;
+        transition: color 0.3s ease;
+    }
+
+    .footer-icon:hover {
+        color: #e58e26; 
+    }
+
+    </style>
+</head>
+<body>
+
+<header>
+    <div class="header">
+        <div><a href="#aboutme">About Me</a></div>
+        <div><a href="#education">Education</a></div>
+        <div><a href="#skill">Skills</a></div>
+        <div><a href="#certificate">Certificates</a></div>
+        <div><a href="#hackathon">Hackathon</a></div>
+    </div>
+</header>
+
+<section id="aboutme">
+    <h2>About Me</h2>
+    <div class="about-container">
+        <img src="portfolio Image.jpeg" alt="Your Photo">
+        <p>As a Bachelor of IT, I gained valuable experience with testing ERP software, deepening my understanding of manual testing methodologies. I developed strong analytical and problem-solving skills and designed and executed comprehensive test plans to ensure high-quality software. My ability to work independently and as part of a team makes me a valuable asset to any organization. Additionally, I have programming skills in various languages including HTML, JavaScript, and Java and etc, which enable me to contribute effectively to software development and testing processes.</p>
+    </div>
+</section>
+
+<section id="education">
+    <h2>Education</h2>
+    <!-- Add your education details here -->
+</section>
+
+<section id="skill">
+    <h2>Skills</h2>
+    <table>
+        <tr>
+            <th>Language</th>
+            <th>Level</th>
+        </tr>
+        <tr>
+            <td>Bahasa Malaysia</td>
+            <td>Fluent</td>
+        </tr>
+        <tr>
+            <td>English</td>
+            <td>Fluent</td>
+        </tr>
+        <tr>
+            <td>Mandarin</td>
+            <td>Fluent</td>
+        </tr>
+    </table>
+</section>
+
+<section id="hackathon">
+    <h2>Hackathon 2024</h2>
+    <div class="carousel" id="hackathonCarousel">
+        <img src="hackathon.jpg" alt="Hackathon 1" class="active">
+        <img src="hackathon2.jpg" alt="Hackathon 2">
+        <img src="hackathon3.jpg" alt="Hackathon 3">
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+    </div>
+    <p>To celebrate our 40th anniversary, we’re hosting an event called Hackatalk, which combines tech talks and hackathon. The event will run for 40 hours throughout the week from July 1st to July 5th, 2024, aligning perfectly with our 40-year milestone.</p>
+    <p>The theme of this year's hackathon is automation. I plan to create a tool that captures user keyboard input, mouse click positions, screen titles, and more. This tool aims to help Quality Engineers (QEs) by making it easier to reproduce bugs and saving time when creating bug reports. By automating these tasks, QEs can focus more on solving issues and ensuring high-quality software.</p>
+</section>
+
+<section id="certificate">
+    <h2>Certificates</h2>
+    <div class="carousel" id="certificateCarousel">
+        <img src="CCNA_cert.png" alt="Certificate 1" class="active">
+        <img src="CCNA_cert2.png" alt="Certificate 2">
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+    </div>
+</section>
+
+<footer>
+    <p>&copy; 2024 My Portfolio</p>
+    <div class="footer-icons">
+        <a href="https://www.facebook.com/profile.php?id=100028957036519" target="_blank" class="footer-icon">
+            <i class="fab fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/jwei630/" target="_blank" class="footer-icon">
+            <i class="fab fa-instagram"></i>
+        </a>
+        <a href="https://wa.me/01157571572" target="_blank" class="footer-icon">
+            <i class="fab fa-whatsapp"></i>
+        </a>
+        <a href="mailto:junwei020630@gmail.com" target="_blank" class="footer-icon">
+            <i class="fas fa-envelope"></i>
+        </a>
+    </div>
+</footer>
+
+
+<script>
+    document.querySelectorAll('.carousel').forEach(carousel => {
+        const images = carousel.querySelectorAll('img');
+        let currentIndex = 0;
+
+        carousel.querySelector('.nextBtn').addEventListener('click', () => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex + 1) % images.length;
+            images[currentIndex].classList.add('active');
+        });
+
+        carousel.querySelector('.prevBtn').addEventListener('click', () => {
+            images[currentIndex].classList.remove('active');
+            currentIndex = (currentIndex - 1 + images.length) % images.length;
+            images[currentIndex].classList.add('active');
+        });
+    });
+
+    // Add scroll-to-section functionality for the header links
+    document.querySelectorAll('.header a').forEach(anchor => {
+        anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+</script>
+
+</body>
+</html>
