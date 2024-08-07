@@ -315,6 +315,35 @@ section#education {
     margin-left: 8px;
 }
 
+.code-container {
+            position: relative;
+            margin: 20px 0;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            background-color: #2e2e2e;
+            color: #f8f8f2;
+        }
+
+        .copy-btn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: #e58e26;
+            color: #fff;
+            border: none;
+            padding: 5px 10px;
+            border-radius: 3px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .copy-btn:hover {
+            background-color: #d57200;
+        }
+
+
+
     </style>
 </head>
 <body>
@@ -430,7 +459,58 @@ section#education {
             <p id="carouselDescription">This is the sign-in screen where users can log in to their account.</p>
         </div>
     </div>
+
+    
 </section>
+
+<section id="mobile-app-code">
+    <h2>Mobile Application Example Code for API used</h2>
+    <div class="code-container">
+        <pre><code id="codeBlock"> firebaseAuth = FirebaseAuth.getInstance()
+
+            loginbtn.setOnClickListener {
+                val inputemail = email.text.toString()
+                val inputpass = password.text.toString()
+            
+                if (TextUtils.isEmpty(inputemail) || TextUtils.isEmpty(inputpass)) {
+                    Toast.makeText(this, "Please input the email & password", Toast.LENGTH_SHORT).show()
+                } else {
+                    if (inputemail == "education@admin.com" && inputpass == "admin123") {
+                        val intent = Intent(this, adminPanel::class.java)
+                        startActivity(intent)
+                        saveUserDataToSharedPreferences(inputemail, inputpass)
+                        finish() 
+                    } else {
+                        firebaseAuth.signInWithEmailAndPassword(inputemail, inputpass)
+                            .addOnCompleteListener(this) { task ->
+                                if (task.isSuccessful) {
+                                    val currentUser = firebaseAuth.currentUser
+                                    if (currentUser != null) {
+                                        getUserDataFromFirebase(currentUser)
+                                    }
+                                } else {
+                                    if (task.exception is FirebaseAuthUserCollisionException) {
+                                        Toast.makeText(
+                                            this,
+                                            "User with this email already exists",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    } else {
+                                        Toast.makeText(
+                                            this,
+                                            "Login failed: ${task.exception}",
+                                            Toast.LENGTH_SHORT
+                                        ).show()
+                                    }
+                                }
+                            }
+                    }
+                }
+            }</code></pre>
+        <button class="copy-btn">Copy</button>
+    </div>
+</section>
+
 
 <section id="certificate">
     <h2>Certificates</h2>
@@ -462,76 +542,85 @@ section#education {
     </div>
 </footer>
 
-
 <script>
-    document.querySelectorAll('.carousel').forEach(carousel => {
-        const images = carousel.querySelectorAll('img');
+    document.addEventListener('DOMContentLoaded', () => {
+        // Carousel functionality
+        document.querySelectorAll('.carousel').forEach(carousel => {
+            const images = carousel.querySelectorAll('img');
+            let currentIndex = 0;
+
+            carousel.querySelector('.nextBtn').addEventListener('click', () => {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex + 1) % images.length;
+                images[currentIndex].classList.add('active');
+            });
+
+            carousel.querySelector('.prevBtn').addEventListener('click', () => {
+                images[currentIndex].classList.remove('active');
+                currentIndex = (currentIndex - 1 + images.length) % images.length;
+                images[currentIndex].classList.add('active');
+            });
+        });
+
+        // Scroll-to-section functionality
+        document.querySelectorAll('.header a').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Mobile app carousel functionality
+        const mobileAppCarousel = document.querySelector('#mobileAppCarousel');
+        const images = mobileAppCarousel.querySelectorAll('img');
+        const titles = ["1. Sign-up","2. Forgot Password", "3. Account Details", "4. New Institution", "5. Restore deleted data","6. Modify Instituition"];
+        const descriptions = [
+            "This is the sign-up screen where users can sign-up their new account. When signing up, I utilized the authentication API provided by Firebase to store the newly registered data. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.), helping developers easily implement user authentication functionality, thereby enhancing the security of the application.",
+            "This is the forgot password screen where users can restore their own password.When users forget their passwords, I used the authentication and real-time database APIs provided by Firebase to store the new password. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.). Additionally, the new password is stored in the real-time database, where data is stored in JSON format and can be synced in real-time to all connected clients via the API.",
+            "This is the account details screen. Here, I implemented input validation to ensure that the user input meets the required standards. The updated content is synchronized to both SQLite and Firebase's real-time database. Additionally, I used Firebase Cloud Storage to store profile pictures, as it is specifically designed for storing and serving large files such as images and videos. It allows for file upload and download through its API, and supports automatic resizing, cropping, and other operations, providing high reliability and security. While other storage methods, like Firebase's real-time database, are mainly used for storing structured data in JSON format, you can convert images to Base64 encoded strings and store them in the database. However, this method is less efficient, especially for large files, as it increases the database size and read time.",
+            "The New Institution screen is used to detect different types of email addresses to determine various identities. Administrators can perform CRUD operations on this page to add different email types. For example, if a new registered user's email suffix is @tar.edu.my, it can be determined that the user is a teacher.",
+            "This is the restore deleted data screen. Administrators can retrieve and restore deleted data from the Firebase Real-time Database. This not only saves time but also increases efficiency.",
+            "Administrators can also modify existing data, which helps improve user fault tolerance. The changes are saved in the Firebase Real-time Database to ensure data consistency."
+        ];
+
         let currentIndex = 0;
 
-        carousel.querySelector('.nextBtn').addEventListener('click', () => {
-            images[currentIndex].classList.remove('active');
+        function updateCarousel(index) {
+            images.forEach(img => img.classList.remove('active'));
+            images[index].classList.add('active');
+            document.getElementById('carouselTitle').innerText = titles[index];
+            document.getElementById('carouselDescription').innerText = descriptions[index];
+        }
+
+        mobileAppCarousel.querySelector('.nextBtn').addEventListener('click', () => {
             currentIndex = (currentIndex + 1) % images.length;
-            images[currentIndex].classList.add('active');
+            updateCarousel(currentIndex);
         });
 
-        carousel.querySelector('.prevBtn').addEventListener('click', () => {
-            images[currentIndex].classList.remove('active');
+        mobileAppCarousel.querySelector('.prevBtn').addEventListener('click', () => {
             currentIndex = (currentIndex - 1 + images.length) % images.length;
-            images[currentIndex].classList.add('active');
+            updateCarousel(currentIndex);
         });
-    });
 
-    // Add scroll-to-section functionality for the header links
-    document.querySelectorAll('.header a').forEach(anchor => {
-        anchor.addEventListener('click', function (e) {
-            e.preventDefault();
-            document.querySelector(this.getAttribute('href')).scrollIntoView({
-                behavior: 'smooth'
+        // Initialize the first item
+        updateCarousel(currentIndex);
+
+        // Copy code functionality
+        const copyBtn = document.querySelector('.copy-btn');
+        const codeBlock = document.getElementById('codeBlock');
+
+        copyBtn.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
             });
         });
     });
-
-    document.addEventListener('DOMContentLoaded', () => {
-    const mobileAppCarousel = document.querySelector('#mobileAppCarousel');
-    const images = mobileAppCarousel.querySelectorAll('img');
-    const titles = ["1. Sign-up","2. Forgot Password", "3. Account Details", "4. New Institution", "5. Restore deleted data","6. Modify Instituition"];
-    const descriptions = [
-        "This is the sign-up screen where users can sign-up their new account. When signing up, I utilized the authentication API provided by Firebase to store the newly registered data. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.), helping developers easily implement user authentication functionality, thereby enhancing the security of the application.",
-        "This is the forgot password screen where users can restore their own password.When users forget their passwords, I used the authentication and real-time database APIs provided by Firebase to store the new password. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.). Additionally, the new password is stored in the real-time database, where data is stored in JSON format and can be synced in real-time to all connected clients via the API.",
-        "This is the account details screen. Here, I implemented input validation to ensure that the user input meets the required standards. The updated content is synchronized to both SQLite and Firebase's real-time database. Additionally, I used Firebase Cloud Storage to store profile pictures, as it is specifically designed for storing and serving large files such as images and videos. It allows for file upload and download through its API, and supports automatic resizing, cropping, and other operations, providing high reliability and security. While other storage methods, like Firebase's real-time database, are mainly used for storing structured data in JSON format, you can convert images to Base64 encoded strings and store them in the database. However, this method is less efficient, especially for large files, as it increases the database size and read time.",
-        "The New Institution screen is used to detect different types of email addresses to determine various identities. Administrators can perform CRUD operations on this page to add different email types. For example, if a new registered user's email suffix is @tar.edu.my, it can be determined that the user is a teacher.",
-        "This is the restore deleted data screen. Administrators can retrieve and restore deleted data from the Firebase Real-time Database. This not only saves time but also increases efficiency.",
-        "Administrators can also modify existing data, which helps improve user fault tolerance. The changes are saved in the Firebase Real-time Database to ensure data consistency."
-    ];
-
-
-  
-
-
-    let currentIndex = 0;
-
-    function updateCarousel(index) {
-        images.forEach(img => img.classList.remove('active'));
-        images[index].classList.add('active');
-        document.getElementById('carouselTitle').innerText = titles[index];
-        document.getElementById('carouselDescription').innerText = descriptions[index];
-    }
-
-    mobileAppCarousel.querySelector('.nextBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex + 1) % images.length;
-        updateCarousel(currentIndex);
-    });
-
-    mobileAppCarousel.querySelector('.prevBtn').addEventListener('click', () => {
-        currentIndex = (currentIndex - 1 + images.length) % images.length;
-        updateCarousel(currentIndex);
-    });
-
-    // Initialize the first item
-    updateCarousel(currentIndex);
-});
-
 </script>
+
 
 </body>
 </html>
