@@ -243,6 +243,75 @@ section#education {
     border-bottom: none;
 }
 
+#mobile-app .carousel {
+    position: relative;
+    width: 80%;
+    margin: 0 auto;
+    text-align: center;
+}
+
+#mobile-app .carousel img {
+    width: 800px; 
+    height: 550px;
+    display: none;
+    margin-left: auto;
+    margin-right: auto;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+
+#mobile-app .carousel img.active {
+    display: block;
+}
+
+#mobile-app .carousel-content {
+    margin-top: 20px;
+}
+
+#mobile-app .carousel-content h3 {
+    color: #e58e26;
+    font-size: 20px;
+}
+
+#mobile-app .carousel-content p {
+    color: #555;
+    font-size: 16px;
+    font-family: 'Georgia', serif;
+    text-align: justify;
+}
+
+#mobile-app .carousel-controls {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
+}
+
+#mobile-app .carousel-controls button {
+    background-color: #f8b400;
+    border: none;
+    padding: 10px 20px;
+    color: #fff;
+    cursor: pointer;
+    border-radius: 5px;
+    transition: background-color 0.3s ease;
+    display: flex;
+    align-items: center;
+}
+
+#mobile-app .carousel-controls button:hover {
+    background-color: #e58e26;
+}
+
+#mobile-app .carousel-controls .prevBtn::before {
+    content: "\2190"; /* Left arrow Unicode */
+    margin-right: 8px;
+}
+
+#mobile-app .carousel-controls .nextBtn::after {
+    content: "\2192"; /* Right arrow Unicode */
+    margin-left: 8px;
+}
 
     </style>
 </head>
@@ -341,6 +410,26 @@ section#education {
     <p>The theme of this year's hackathon is automation. I plan to create a tool that captures user keyboard input, mouse click positions, screen titles, and more. This tool aims to help Quality Engineers (QEs) by making it easier to reproduce bugs and saving time when creating bug reports. By automating these tasks, QEs can focus more on solving issues and ensuring high-quality software.</p>
 </section>
 
+<section id="mobile-app">
+    <h2>Mobile Application</h2>
+    <div class="carousel" id="mobileAppCarousel">
+        <img src="mobile1.png" alt="Sign-up " class="active">
+        <img src="mobile2.png" alt="Forgot Password ">
+        <img src="mobile3.png" alt="Account Details">
+        <img src="mobile4.png" alt="New Institution">
+        <img src="mobile5.png" alt="Restore deleted data">
+        <img src="mobile6.png" alt="Modify Instituition">
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+        <div class="carousel-content">
+            <h3 id="carouselTitle">Sign-in Screen</h3>
+            <p id="carouselDescription">This is the sign-in screen where users can log in to their account.</p>
+        </div>
+    </div>
+</section>
+
 <section id="certificate">
     <h2>Certificates</h2>
     <div class="carousel" id="certificateCarousel">
@@ -399,6 +488,47 @@ section#education {
             });
         });
     });
+
+    document.addEventListener('DOMContentLoaded', () => {
+    const mobileAppCarousel = document.querySelector('#mobileAppCarousel');
+    const images = mobileAppCarousel.querySelectorAll('img');
+    const titles = ["1. Sign-up","2. Forgot Password", "3. Account Details", "4. New Institution", "5. Restore deleted data","6. Modify Instituition"];
+    const descriptions = [
+        "This is the sign-up screen where users can sign-up their new account. When signing up, I utilized the authentication API provided by Firebase to store the newly registered data. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.), helping developers easily implement user authentication functionality, thereby enhancing the security of the application.",
+        "This is the forgot password screen where users can restore their own password.When users forget their passwords, I used the authentication and real-time database APIs provided by Firebase to store the new password. The Authentication service offers various authentication methods (such as email/password, third-party logins, etc.). Additionally, the new password is stored in the real-time database, where data is stored in JSON format and can be synced in real-time to all connected clients via the API.",
+        "This is the account details screen. Here, I implemented input validation to ensure that the user input meets the required standards. The updated content is synchronized to both SQLite and Firebase's real-time database. Additionally, I used Firebase Cloud Storage to store profile pictures, as it is specifically designed for storing and serving large files such as images and videos. It allows for file upload and download through its API, and supports automatic resizing, cropping, and other operations, providing high reliability and security. While other storage methods, like Firebase's real-time database, are mainly used for storing structured data in JSON format, you can convert images to Base64 encoded strings and store them in the database. However, this method is less efficient, especially for large files, as it increases the database size and read time.",
+        "The New Institution screen is used to detect different types of email addresses to determine various identities. Administrators can perform CRUD operations on this page to add different email types. For example, if a new registered user's email suffix is @tar.edu.my, it can be determined that the user is a teacher.",
+        "This is the restore deleted data screen. Administrators can retrieve and restore deleted data from the Firebase Real-time Database. This not only saves time but also increases efficiency.",
+        "Administrators can also modify existing data, which helps improve user fault tolerance. The changes are saved in the Firebase Real-time Database to ensure data consistency."
+    ];
+
+
+  
+
+
+    let currentIndex = 0;
+
+    function updateCarousel(index) {
+        images.forEach(img => img.classList.remove('active'));
+        images[index].classList.add('active');
+        document.getElementById('carouselTitle').innerText = titles[index];
+        document.getElementById('carouselDescription').innerText = descriptions[index];
+    }
+
+    mobileAppCarousel.querySelector('.nextBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex + 1) % images.length;
+        updateCarousel(currentIndex);
+    });
+
+    mobileAppCarousel.querySelector('.prevBtn').addEventListener('click', () => {
+        currentIndex = (currentIndex - 1 + images.length) % images.length;
+        updateCarousel(currentIndex);
+    });
+
+    // Initialize the first item
+    updateCarousel(currentIndex);
+});
+
 </script>
 
 </body>
