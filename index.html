@@ -315,48 +315,75 @@ section#education {
     margin-left: 8px;
 }
 
+.code-container pre {
+    max-height: 300px; /* 设置最大高度，视需要调整 */
+    overflow-y: auto;  /* 启用垂直滚动条 */
+    white-space: pre-wrap; /* 自动换行 */
+}
+
+
 .code-container {
-            position: relative;
-            margin: 20px 0;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 5px;
-            background-color: #2e2e2e;
-            color: #f8f8f2;
-        }
+        position: relative;
+        margin: 20px 0;
+        padding: 10px;
+        border: 5px double #e58e26;
+        border-radius: 5px;
+        background-color: #2e2e2e;
+        color: #f8f8f2;
+    }
 
-        .copy-btn {
-            position: absolute;
-            top: 10px;
-            right: 10px;
-            background: #e58e26;
-            color: #fff;
-            border: none;
-            padding: 5px 10px;
-            border-radius: 3px;
-            cursor: pointer;
-            transition: background-color 0.3s;
-        }
+    .code-container pre {
+        max-height: 300px; /* 设置最大高度，视需要调整 */
+        overflow-y: auto;  /* 启用垂直滚动条 */
+        white-space: pre-wrap; /* 自动换行 */
+        
+    }
 
-        .copy-btn:hover {
-            background-color: #d57200;
-        }
+    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3 {
+        position: absolute;
+        top: 10px;
+        right: 10px;
+        background: #e58e26;
+        color: #fff;
+        border: none;
+        padding: 5px 10px;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: background-color 0.3s;
+    }
 
+    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3:hover {
+        background-color: #d57200;
+    }
+
+    .code-container pre::-webkit-scrollbar {
+    width: 8px; 
+}
+
+.code-container pre::-webkit-scrollbar-thumb {
+    background-color: #e58e26;
+    border-radius: 10px;  
+}
+
+.code-container pre::-webkit-scrollbar-track {
+    background-color: #2e2e2e; 
+}
 
 
     </style>
 </head>
 <body>
 
-<header>
-    <div class="header">
-        <div><a href="#aboutme">About Me</a></div>
-        <div><a href="#education">Education</a></div>
-        <div><a href="#skill">Skills</a></div>
-        <div><a href="#certificate">Certificates</a></div>
-        <div><a href="#hackathon">Hackathon</a></div>
-    </div>
-</header>
+    <header>
+        <div class="header">
+            <div><a href="#aboutme"><i class="fas fa-user"></i> About Me</a></div>
+            <div><a href="#education"><i class="fas fa-graduation-cap"></i> Education</a></div>
+            <div><a href="#skill"><i class="fas fa-code"></i> Skills</a></div>
+            <div><a href="#certificate"><i class="fas fa-certificate"></i> Certificates</a></div>
+            <div><a href="#hackathon"><i class="fas fa-trophy"></i> Hackathon</a></div>
+        </div>
+    </header>
+    
 
 <section id="aboutme">
     <h2>About Me</h2>
@@ -466,6 +493,7 @@ section#education {
 <section id="mobile-app-code">
     <h2>Mobile Application Example Code for API used</h2>
     <div class="code-container">
+        <h2>Firebase API implementation</h2>
         <pre><code id="codeBlock"> firebaseAuth = FirebaseAuth.getInstance()
 
             loginbtn.setOnClickListener {
@@ -511,6 +539,151 @@ section#education {
     </div>
 </section>
 
+<section id="java-adt">
+    <h2>Java Project (ADT implementation)</h2>
+    <div class="carousel" id="javaCarousel">
+        <img src="java_adt.png" alt="display membership list" class="active">
+        <img src="java_adt2.png" alt="create new membership">
+        <img src="java_adt3.png" alt="Update membership">
+        <img src="java_adt4.png" alt="Upgrade membership">
+        <img src="java_adt5.png" alt="Remove membership">
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+
+        <div class="code-container">
+            <h2>ADT</h2>
+            <pre><code id="codeBlock1">
+                @Override
+                public T getEntry(int givenPosition) {
+                  T result = null;
+              
+                  if ((givenPosition >= 1) && (givenPosition <= numberOfEntries)) {
+                    Node currentNode = firstNode;
+                    for (int i = 0; i < givenPosition - 1; ++i) {
+                      currentNode = currentNode.next;		// advance currentNode to next node
+                    }
+                    result = currentNode.data;	// currentNode is pointing to the node at givenPosition
+                  }
+              
+                  return result;
+                }
+    </code></pre>
+            <button class="copy-btn1">Copy</button>
+        </div>
+
+        <div class="code-container">
+            <h2>Module</h2>
+            <pre><code id="codeBlock2">
+                public void MembershipList() {
+                    int count = 1;
+            
+                    System.out.println("+------+-------------------+------------------------+----------------+--------------+-------------------+-------------+");
+                    System.out.println("|  No. |    Custoemr Name  |  Phone Number          |    Member ID   |  Expiry Date |  Membership Type  |  Discount   |");
+                    System.out.println("+------+-------------------+------------------------+----------------+--------------+-------------------+-------------+");
+            
+                    for (int i = 1; i <= Membership.getNumberOfEntries(); i++) {
+                        Membership temp = Membership.getEntry(i);
+                        String customerName = temp.getCustomerName();
+                        String customerPhoneNum = temp.getCustomerPhoneNum();
+                        String membershipID = temp.getMembershipID();
+                        String expiryDate = temp.getExpiryDate();
+                        int discount = temp.getDiscount();
+                        String membershipType = temp.getMembershipType();
+            
+                        System.out.printf("|%4d  |%15s    | %15s        |    %7s     | %12s |  %14s   |     %4d    |\n", count, customerName, customerPhoneNum, membershipID, expiryDate, membershipType, discount);
+            
+                        count++;
+                    }
+                    System.out.println("+------+-------------------+------------------------+----------------+--------------+-------------------+-------------+\n");
+                    System.out.println("Total is " + Membership.getNumberOfEntries() + " record (s)");
+            
+                    membershipMenu();
+            
+                }    
+            </code></pre>
+            <button class="copy-btn2">Copy</button>
+        </div>
+
+        <div class="code-container">
+            <h2>Entity</h2>
+            <pre><code id="codeBlock3">
+                public class Membership {
+                    private String customerName;
+                    private String customerPhoneNum;
+                    private String membershipID;
+                    private String expiryDate;
+                    private int discount;
+                    private String membershipType;
+                
+                    public Membership() {
+                    }
+                
+                    public Membership(String customerName, String customerPhoneNum, String membershipID, String expiryDate, int discount, String membershipType) {
+                        this.customerName = customerName;
+                        this.customerPhoneNum = customerPhoneNum;
+                        this.membershipID = membershipID;
+                        this.expiryDate = expiryDate;
+                        this.discount = discount;
+                        this.membershipType = membershipType;
+                    }
+                
+                    public String getCustomerName() {
+                        return customerName;
+                    }
+                
+                    public void setCustomerName(String customerName) {
+                        this.customerName = customerName;
+                    }
+                
+                    public String getCustomerPhoneNum() {
+                        return customerPhoneNum;
+                    }
+                
+                    public void setCustomerPhoneNum(String customerPhoneNum) {
+                        this.customerPhoneNum = customerPhoneNum;
+                    }
+                
+                    public String getMembershipID() {
+                        return membershipID;
+                    }
+                
+                    public void setMembershipID(String membershipID) {
+                        this.membershipID = membershipID;
+                    }
+                
+                    public String getExpiryDate() {
+                        return expiryDate;
+                    }
+                
+                    public void setExpiryDate(String expiryDate) {
+                        this.expiryDate = expiryDate;
+                    }
+                
+                    public int getDiscount() {
+                        return discount;
+                    }
+                
+                    public void setDiscount(int discount) {
+                        this.discount = discount;
+                    }
+                
+                    public String getMembershipType() {
+                        return membershipType;
+                    }
+                
+                    public void setMembershipType(String membershipType) {
+                        this.membershipType = membershipType;
+                    }
+    </code></pre>
+            <button class="copy-btn3">Copy</button>
+        </div>
+    
+    </div>
+
+    
+</section>
 
 <section id="certificate">
     <h2>Certificates</h2>
@@ -613,6 +786,39 @@ section#education {
 
         copyBtn.addEventListener('click', () => {
             navigator.clipboard.writeText(codeBlock.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+            });
+        });
+
+        const copyBtn1 = document.querySelector('.copy-btn1');
+        const codeBlock1 = document.getElementById('codeBlock1');
+
+        copyBtn1.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock1.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+            });
+        });
+
+        const copyBtn2 = document.querySelector('.copy-btn2');
+        const codeBlock2 = document.getElementById('codeBlock2');
+
+        copyBtn2.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock2.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+            });
+        });
+
+        const copyBtn3 = document.querySelector('.copy-btn3');
+        const codeBlock3 = document.getElementById('codeBlock3');
+
+        copyBtn3.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock3.textContent).then(() => {
                 alert('Code copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy code: ', err);
