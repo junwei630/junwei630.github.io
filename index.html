@@ -18,12 +18,8 @@
             background-image: url('background.jpg');
             background-size: cover;
             background-attachment: fixed;
-            animation: backgroundAnimation 20s infinite alternate;
         }
-        @keyframes backgroundAnimation {
-            0% { filter: brightness(1); }
-            100% { filter: brightness(0.7); }
-        }
+      
         header {
             background-color: #f8b400;
             padding: 20px 0;
@@ -227,7 +223,7 @@ section#education {
     border-top: 3px solid #e58e26;
     border-bottom: 3px solid #e58e26;
     padding: 40px 20px;
-    background-color: rgba(255, 255, 255, 0.9);
+    background-color: rgba(255, 255, 255, 0.8);
     border-radius: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     margin: 20px 0;
@@ -339,7 +335,7 @@ section#education {
         
     }
 
-    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3 {
+    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3, .copy-btn4 {
         position: absolute;
         top: 10px;
         right: 10px;
@@ -352,7 +348,7 @@ section#education {
         transition: background-color 0.3s;
     }
 
-    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3:hover {
+    .copy-btn, .copy-btn1, .copy-btn2, .copy-btn3, .copy-btn4:hover {
         background-color: #d57200;
     }
 
@@ -368,6 +364,15 @@ section#education {
 .code-container pre::-webkit-scrollbar-track {
     background-color: #2e2e2e; 
 }
+
+.justified-text {
+    text-align: justify;
+    margin: 20px 0; /* 可选: 添加上下边距 */
+    line-height: 1.6; /* 可选: 增加行高, 提高可读性 */
+    font-size: 16px; /* 可选: 调整字体大小 */
+    color: #333; /* 可选: 设置文本颜色 */
+}
+
 
 
     </style>
@@ -389,7 +394,7 @@ section#education {
     <h2>About Me</h2>
     <div class="about-container">
         <img src="portfolio Image.jpeg" alt="Your Photo">
-        <p>As a Bachelor of IT, I gained valuable experience with testing ERP software, deepening my understanding of manual testing methodologies. I developed strong analytical and problem-solving skills and designed and executed comprehensive test plans to ensure high-quality software. My ability to work independently and as part of a team makes me a valuable asset to any organization. Additionally, I have programming skills in various languages including HTML, JavaScript, and Java and etc, which enable me to contribute effectively to software development and testing processes.</p>
+        <p><strong style="font-size: 70px;">Chu Jun Wei </strong> <br>As a Bachelor of IT, I gained valuable experience with testing ERP software, deepening my understanding of manual testing methodologies. I developed strong analytical and problem-solving skills and designed and executed comprehensive test plans to ensure high-quality software. My ability to work independently and as part of a team makes me a valuable asset to any organization. Additionally, I have programming skills in various languages including HTML, JavaScript, and Java and etc, which enable me to contribute effectively to software development and testing processes.</p>
     </div>
 </section>
 
@@ -428,9 +433,6 @@ section#education {
 
 
 
-
-
-
 <section id="skill">
     <h2>Skills</h2>
     <table>
@@ -464,8 +466,8 @@ section#education {
             <button class="nextBtn">Next</button>
         </div>
     </div>
-    <p>To celebrate our 40th anniversary, we’re hosting an event called Hackatalk, which combines tech talks and hackathon. The event will run for 40 hours throughout the week from July 1st to July 5th, 2024, aligning perfectly with our 40-year milestone.</p>
-    <p>The theme of this year's hackathon is automation. I plan to create a tool that captures user keyboard input, mouse click positions, screen titles, and more. This tool aims to help Quality Engineers (QEs) by making it easier to reproduce bugs and saving time when creating bug reports. By automating these tasks, QEs can focus more on solving issues and ensuring high-quality software.</p>
+    <p style="width: 80%;margin-left: auto;margin-right: auto;">To celebrate our 40th anniversary, we’re hosting an event called Hackatalk, which combines tech talks and hackathon. The event will run for 40 hours throughout the week from July 1st to July 5th, 2024, aligning perfectly with our 40-year milestone.</p>
+    <p style="width: 80%;margin-left: auto;margin-right: auto;">The theme of this year's hackathon is automation. I plan to create a tool that captures user keyboard input, mouse click positions, screen titles, and more. This tool aims to help Quality Engineers (QEs) by making it easier to reproduce bugs and saving time when creating bug reports. By automating these tasks, QEs can focus more on solving issues and ensuring high-quality software.</p>
 </section>
 
 <section id="mobile-app">
@@ -685,6 +687,171 @@ section#education {
     
 </section>
 
+<section id="iot">
+    <h2>IOT Project (Smart Ligthing)</h2>
+    <h4 class="justified-text" style="width: 80%;margin-left: auto;margin-right: auto;">I have used the light sensor, motion sensor, and the LED to build my module. The light sensor and motion sensor are the input devices, and the LED is the output device. My module has three modes: auto mode, manual mode, and motion mode. In auto mode, the LED turns on automatically when the surrounding light level is lower than 700, and motion is detected. The LED brightness adjusts automatically according to the surrounding light level. In manual mode, the user can adjust the LED brightness using a slider and can also turn the LED on or off. The last mode, motion mode, is suitable for nighttime, as the LED turns on whenever motion is detected by the motion sensor.</h4>
+    <div class="carousel" id="javaCarousel">
+        <img src="iot1.png" alt="overall" class="active">
+        <img src="iot2.png" alt="component required">
+        <img src="iot3.png" alt="mobile application">
+        <img src="iot4.png" alt="software required">
+
+        <div class="carousel-controls">
+            <button class="prevBtn">Previous</button>
+            <button class="nextBtn">Next</button>
+        </div>
+
+        <div class="code-container">
+            <h2>Smart lighting (Python code)</h2>
+            <pre><code id="codeBlock4">
+            
+#coplte
+import grovepi
+import time
+from time import *
+from pyrebase import pyrebase
+from datetime import datetime
+import pytz
+import pyrebase
+
+
+config = {
+    "apiKey": "AIzaSyCBcl9m3NOHMRZMfz-KNmC0INvv40-nhzw",
+    "authDomain": "appinventortesting-d3d2d.firebaseapp.com",
+    "databaseURL": "https://appinventortesting-d3d2d-default-rtdb.firebaseio.com",
+    "storageBucket": "appinventortesting-d3d2d.appspot.com"
+}
+
+firebase = pyrebase.initialize_app(config)
+db = firebase.database()
+
+motion_sensor1 = 7 
+light_sensor1 = 16
+led1 = 3
+delay = 5
+
+grovepi.pinMode(motion_sensor1, "INPUT")
+grovepi.pinMode(light_sensor1, "INPUT")
+grovepi.pinMode(led1, "OUTPUT")
+
+motion_mode=False
+manual_mode=False
+onoroff_mode=False
+auto_mode=True
+
+while True:
+   
+    sleep(5)
+    data = db.child("Light Report").get().val()
+
+    # Assign each value to a separate variable
+    brightnessRetrieved = data ["Brightness"]
+    auto_mode = data["Auto Mode"]
+    manual_mode = data["Manual Mode"]
+    motion_mode = data["Motion Mode"]
+
+
+# Print the variables
+    print("Auto Mode: ", auto_mode)
+    print("Manual Mode: ", manual_mode)
+    print("Motion Mode: ", motion_mode)
+    print("Brightness :",brightnessRetrieved)
+    
+    MIN_BRIGHTNESS = 0  # minimum brightness
+    MAX_BRIGHTNESS = 255  # maximum brightness
+    BRIGHTNESS_RANGE = MAX_BRIGHTNESS - MIN_BRIGHTNESS  # brightness range
+    motion_detected1 = grovepi.digitalRead(motion_sensor1)
+    light_level1 = grovepi.analogRead(light_sensor1)
+
+        
+    if(auto_mode=="true"):
+       
+        print("___________________AUTO MODE______________________")
+        if motion_detected1 ==0:
+            grovepi.analogWrite(led1, 0)
+    # Calculate the desired brightness based on the light sensor value
+        if light_level1 > 700 or motion_detected1 == 0:
+        # If the surrounding light level is very bright, set the LED to the minimum brightness
+            brightness = MIN_BRIGHTNESS
+            print(motion_detected1)
+            print(light_level1)
+            
+        elif motion_detected1 ==1 and light_level1 < 700:
+        # Otherwise, calculate the brightness as a function of the light level
+            brightness = int((1 - (light_level1 / 700)) * BRIGHTNESS_RANGE +MIN_BRIGHTNESS)
+            grovepi.analogWrite(led1, brightness)
+            
+            
+            #notify user when user is going out from home
+            now = datetime.now(pytz.timezone("Asia/Singapore"))
+            print("Date:", now.strftime("%Y:%m:%d"))      
+            print("Time:", now.strftime("%H:%M:%S"))
+            date = now.strftime("%Y-%m-%d")
+            time = now.strftime("%H-%M-%S")
+            
+            
+            
+            data = {"Date": date,"Hour": time}
+            
+           
+            results = db.child("Light Report").set(data)
+            new_data = {
+                "Motion Mode":'false',
+                "Manual Mode":'false',
+                "Auto Mode":'true',
+                "Brightness":'0'
+                }
+            db.child("Light Report").update(new_data)
+            
+
+    if(motion_mode == "true"):
+        print("___________________MOTION MODE______________________")
+        global lastMotionTime
+        motion_detected1 = grovepi.digitalRead(motion_sensor1)
+        light_level1 = grovepi.analogRead(light_sensor1)
+        print(motion_detected1)
+        if motion_detected1 == 1:
+            grovepi.analogWrite(led1, 255)
+            #lastMotionTime = time.time()
+        elif motion_detected1 == 0:
+            grovepi.analogWrite(led1,MIN_BRIGHTNESS)
+            #lastMotionTime = time.time()
+        #else:
+            #currentTime = time.time()
+            #if currentTime - lastMotionTime > delay:
+                #grovepi.analogWrite(led1,MIN_BRIGHTNESS)
+        new_data = {
+                "Auto Mode":'false',
+                "Manual Mode":'false'
+                }
+        db.child("Light Report").update(new_data)
+      
+  
+    
+    if manual_mode == "true":
+        print("___________________MANUAL MODE______________________")
+        data = db.child("Light Report").get().val()
+
+        # Assign each value to a separate variable
+        brightnessRetrieved = int(data ["Brightness"])
+
+        print("Brightness Adjusted :",brightnessRetrieved)
+        grovepi.analogWrite(led1, brightnessRetrieved)
+        
+        
+        new_data = {
+                "Motion Mode":'false',
+                "Auto Mode":'false'
+                }
+        db.child("Light Report").update(new_data)
+      
+
+    </code></pre>
+            <button class="copy-btn4">Copy</button>
+        </div>
+        </div>
+    </section>
+
 <section id="certificate">
     <h2>Certificates</h2>
     <div class="carousel" id="certificateCarousel">
@@ -819,6 +986,17 @@ section#education {
 
         copyBtn3.addEventListener('click', () => {
             navigator.clipboard.writeText(codeBlock3.textContent).then(() => {
+                alert('Code copied to clipboard!');
+            }).catch(err => {
+                console.error('Failed to copy code: ', err);
+            });
+        });
+
+        const copyBtn4 = document.querySelector('.copy-btn4');
+        const codeBlock4 = document.getElementById('codeBlock4');
+
+        copyBtn4.addEventListener('click', () => {
+            navigator.clipboard.writeText(codeBlock4.textContent).then(() => {
                 alert('Code copied to clipboard!');
             }).catch(err => {
                 console.error('Failed to copy code: ', err);
